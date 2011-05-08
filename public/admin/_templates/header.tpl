@@ -103,7 +103,8 @@
 	 <li><a href="{$BASE_URL_ADMIN}links/footer3/">Footer Column 3</a></li>
 	 </ul>
 	 </li>
-	 <li><a {if $CURRENT_PAGE == 'settings'}class="selected"{/if} href="{$BASE_URL_ADMIN}settings/">Settings</a>
+	 <li><a {if $CURRENT_PAGE == 'settings'}class="selected"{/if} href="{$BASE_URL_ADMIN}settings/">Settings</a></li>
+	 <li><a {if $CURRENT_PAGE == 'paypal'}class="selected"{/if} href="{$BASE_URL_ADMIN}paypal/">PayPal</a></li>
 	 <ul>
 	 {section name=index loop=$settings_categories}
 	 <li><a href="{$BASE_URL_ADMIN}settings/{$settings_categories[index].var_name}/">{$settings_categories[index].name}</a></li>

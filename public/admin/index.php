@@ -114,7 +114,15 @@
 			require_once 'page_category.php';
 			$flag = 1;
 			break;
-
+        case 'paypal':
+        	if(!isset($_SESSION['AdminId']))
+        	{
+        		redirect_to(BASE_URL);
+        		exit;
+        	}
+        	require_once 'page_paypal.php';
+        	$flag = 1;
+        	break;
 		case 'page-unavailable':
 			if(!isset($_SESSION['AdminId']))
 			{

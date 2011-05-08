@@ -4,4 +4,8 @@ public/_config/config.php
 public/_templates/hireme/_cache/
 public/_templates/default/_cache/
 public/_templates/hackergarage/_cache/
+.buildpath
+.project
+.settings/
+public/.htaccess
 *~

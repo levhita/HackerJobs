@@ -260,13 +260,13 @@ function get_city_by_id($cityID)
 function get_types()
 {
 	global $db;
-	$sql = 'SELECT id, name, var_name 
+	$sql = 'SELECT id, name, var_name, amount, paypal_button_id  
 		FROM '.DB_PREFIX.'types ';
 	$result = $db->query($sql);
 	$types = array();
 	while($row = $result->fetch_assoc())
 	{
-		$types[] = array('id' => $row['id'], 'name' => $row['name'], 'var_name' => $row['var_name']);
+		$types[] = array('id' => $row['id'], 'name' => $row['name'], 'var_name' => $row['var_name'], 'amount' => $row['amount'], 'paypal_button_id' => $row['paypal_button_id']);
 	}
 	return $types;
 }
@@ -391,5 +391,46 @@ function generate_sitemap($type)
         }        
     }
 
+}
+
+function get_type_name_by_id($id)
+{
+	global $db;
+	$sql = 'SELECT name FROM '.DB_PREFIX.'types WHERE 
+		id = '.$id;
+	$result = $db->query($sql);
+	$row = $result->fetch_assoc();
+ 
+	if ($row)
+		return $row['name'];
+	return false;
+}
+ 
+// get type amount
+function get_type_amount_by_id($id)
+{
+	global $db;
+	$sql = 'SELECT amount FROM '.DB_PREFIX.'types WHERE 
+		id = '.$id;
+	$result = $db->query($sql);
+	$row = $result->fetch_assoc();
+ 
+	if ($row)
+		return $row['amount'];
+	return false;
+}
+ 
+// get type button id
+function get_type_button_id_by_id($id)
+{
+	global $db;
+	$sql = 'SELECT paypal_button_id FROM '.DB_PREFIX.'types WHERE 
+		id = '.$id;
+	$result = $db->query($sql);
+	$row = $result->fetch_assoc();
+ 
+	if ($row)
+		return $row['paypal_button_id'];
+	return false;
 }
 ?>

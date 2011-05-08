@@ -919,15 +919,25 @@ class Job
 		$result = $db->query($sql);
 	}
 	
-	// Publishes a newly created job post (is_temp => 0)
-	public function Publish()
-	{
-		global $db;
-		
-		$sql = 'UPDATE '.DB_PREFIX.'jobs SET is_temp = 0 WHERE id = ' . $this->mId;
-		
-		$db->query($sql);
-	}
+    public function Publish()
+    {
+    	global $db;
+    	if (PAYPAL_IS_ACTIVE == 0)
+    	{
+    		if ($this->CheckPosterEmail()) {
+    			$sql = 'UPDATE '.DB_PREFIX.'jobs SET is_temp = 0, is_active = 1 WHERE id = ' . $this->mId;
+    		} else {
+    			$sql = 'UPDATE '.DB_PREFIX.'jobs SET is_temp = 0, is_active = 0 WHERE id = ' . $this->mId;
+    		}
+    	} else {
+    		if ($this->CheckPosterEmail() && PAYPAL_FIRST_POST_ONLY == 1) {
+    			$sql = 'UPDATE '.DB_PREFIX.'jobs SET is_temp = 0, is_active = 1 WHERE id = ' . $this->mId;
+    		} else {
+    			$sql = 'UPDATE '.DB_PREFIX.'jobs SET is_temp = 0, is_active = 0 WHERE id = ' . $this->mId;
+    		}
+    	}
+    	$db->query($sql);
+    }
 	
 	// Activate an inactive job post
 	public function Activate()

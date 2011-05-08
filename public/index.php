@@ -133,7 +133,25 @@
 			$smarty->assign('postRequiresModeration', $extra);
 			$template = 'publish-confirmation.tpl';
 			break;
-			
+		
+		case 'payment':
+        	if(!ENABLE_NEW_JOBS) { redirect_to(BASE_URL); exit; }
+        	$flag =1;
+        	$job = new Job($id);
+        	$job_title = BASE_URL . URL_JOB .'/' . $job->mId . '/' . $job->mUrlTitle . '/';
+        	$smarty->assign('auth', $job->GetAuth());
+        	$smarty->assign('job_url', $job_title);
+        	$smarty->assign('first_time_post', $extra);
+        	if (PAYPAL_IS_ACTIVE == 1) {
+        		$smarty->assign('first_time_post', $job->CheckPosterEmail());
+        		$smarty->assign('paypal_item_number', $id);
+        		$smarty->assign('paypal_item_name', $job->mTitle);
+        		$smarty->assign('paypal_job_type', get_type_name_by_id($job->mTypeId));
+        		$smarty->assign('paypal_amount', get_type_amount_by_id($job->mTypeId));
+        		$smarty->assign('paypal_button_id', get_type_button_id_by_id($job->mTypeId));
+        	}
+        	$template = 'publish-paypal.tpl';
+        	break;	
 		// deactivate a post
 		case 'deactivate':
 			require_once 'page_deactivate.php';

@@ -42,4 +42,14 @@ define('ENABLE_CAPTCHA_ON_APPLY_PAGE', $settings['captcha_enable_on_apply_page']
 define('ENABLE_CAPTCHA_ON_CONTACT_PAGE', $settings['captcha_enable_on_contact_page']);
 // default language code, useful if you with to quickly switch between translation files later
 define('LANG_CODE', 'en');
+
+// PayPal Settings
+$pp = new SimplePayPal();
+$pp_settings = $pp->showsettings();
+define('PAYPAL_IS_ACTIVE',$pp_settings['is_active']);
+define('PAYPAL_FIRST_POST_ONLY',$pp_settings['first_post_only']);
+define('PAYPAL_BUTTON_TYPE',$pp_settings['button_type']);
+define('PAYPAL_BUTTON_IMAGE',$pp_settings['button_image']);
+define('PAYPAL_CURRENCY_CODE',$pp_settings['currency_code']);
+define('PAYPAL_RETURN_URL',$pp_settings['return_url']);
 ?>
