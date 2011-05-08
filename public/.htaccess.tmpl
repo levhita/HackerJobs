@@ -2,6 +2,8 @@
 # AddHandler x-mapp-php5 .php
 
 RewriteEngine on
+#Use in case of mod_alias
+#RewriteBase /subfolder
 Options +FollowSymlinks
 
 RewriteCond %{REQUEST_FILENAME} !-f
