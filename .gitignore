@@ -8,5 +8,6 @@ public/_templates/hackergarage/_cache/
 .project
 .settings/
 public/.htaccess
+public/admin/.htaccess
 public/admin/_templates/_cache/*
 *~
