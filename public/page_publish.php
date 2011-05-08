@@ -35,7 +35,6 @@
 	
 	$smarty->assign('postRequiresModeration', $postRequiresModeration);
 	
-	redirect_to(BASE_URL . 'confirm/' . $job->mId . '/' . ($postRequiresModeration ? 1: 0) . '/');
 	if (PAYPAL_IS_ACTIVE == 1 && PAYPAL_FIRST_POST_ONLY == 0)
     {
       redirect_to(BASE_URL . 'payment/' . $job->mId . '/' . ($postRequiresModeration ? 1: 0) . '/');

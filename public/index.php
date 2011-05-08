@@ -143,7 +143,7 @@
         	$smarty->assign('job_url', $job_title);
         	$smarty->assign('first_time_post', $extra);
         	if (PAYPAL_IS_ACTIVE == 1) {
-        		$smarty->assign('first_time_post', $job->CheckPosterEmail());
+        		$smarty->assign('first_time_post', true); //$job->IsApprovedPosterEmail());
         		$smarty->assign('paypal_item_number', $id);
         		$smarty->assign('paypal_item_name', $job->mTitle);
         		$smarty->assign('paypal_job_type', get_type_name_by_id($job->mTypeId));
