@@ -18,8 +18,8 @@
  
 	{if $first_time_post == 1 && $smarty.const.PAYPAL_FIRST_POST_ONLY == 1}
 		<div class="posted-ok">
-				<strong>{$translations.publish.congratulations}</strong><br /><a href="{$job_url}">{$translations.publish.view}</a>.
-			</div>
+			<strong>{$translations.publish.congratulations}</strong><br /><a href="{$job_url}">{$translations.publish.view}</a>.
+
 			<h4>{$translations.publish.options_title}</h4>
 			<p>
 				{$translations.publish.options_info}:
@@ -32,6 +32,7 @@
 	{else}
 		<div class="posted-pending">
 			<p>{$translations.paypal.payment_needed}</p>
+
 			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 			<input type="hidden" name="cmd" value="{$smarty.const.PAYPAL_BUTTON_TYPE}">
 			<input type="hidden" name="currency_code" value="{$smarty.const.PAYPAL_CURRENCY_CODE}">
@@ -39,6 +40,7 @@
 			<input type="hidden" name="item_name" value="#{$paypal_item_number} - ({$paypal_job_type}) {$paypal_item_name}">
 			<input type="hidden" name="hosted_button_id" value="{$paypal_button_id}">
 			<input type="hidden" name="notify_url" value="{$smarty.const.PAYPAL_RETURN_URL}">
+			<input type="hidden" name="return" value="{$BASE_URL}paypal/{$CURRENT_ID}/{$auth}/">
 			<div class="suggestion">
 				<input type="image" src="{$smarty.const.PAYPAL_BUTTON_IMAGE}" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 				<strong>{$translations.paypal.amount}: {$smarty.const.PAYPAL_CURRENCY_CODE} {$paypal_amount}</strong> | {$translations.paypal.info}

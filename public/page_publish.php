@@ -1,9 +1,10 @@
 <?php
 	$job = new Job($id);
-	
+	$amount = get_type_amount_by_id($job->mTypeId);
 	$isNewPost = $job->mIsTemp;
-	$postRequiresModeration = !$job->IsApprovedPosterEmail() && ENABLE_NEW_POST_MODERATION;
 	
+	$postRequiresModeration = (!$job->IsApprovedPosterEmail() && ENABLE_NEW_POST_MODERATION);
+	$postRequiresPayment = (PAYPAL_IS_ACTIVE == 1 && $amount > 0);
 	if ($isNewPost)
 		$job->Publish();
 	
@@ -24,7 +25,7 @@
 	}
 	else
 	{
-		if (!$job->mIsActive)
+		if (!$job->mIsActive && !$postRequiresPayment)
 			$job->Activate();
 		
 		if ($isNewPost)
@@ -34,8 +35,10 @@
 	}
 	
 	$smarty->assign('postRequiresModeration', $postRequiresModeration);
+	$smarty->assign('postRequiresPayment', $postRequiresPayment);
 	
-	if (PAYPAL_IS_ACTIVE == 1 && PAYPAL_FIRST_POST_ONLY == 0)
+	
+	if ( $postRequiresPayment )
     {
       redirect_to(BASE_URL . 'payment/' . $job->mId . '/' . ($postRequiresModeration ? 1: 0) . '/');
     }

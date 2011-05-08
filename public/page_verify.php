@@ -30,6 +30,7 @@
 		$jobInfo['description'] = str_replace(array("\r\n", "\r", "\n"), "<br />", $jobInfo['description']);
 	}
 	$smarty->assign('job', $jobInfo);
+	$smarty->assign('preview', true);
 	$html_title = stripslashes($jobInfo['title']) . ' at ' . stripslashes($jobInfo['company']) . ' / ' . SITE_NAME;
 	$template = 'publish-verify.tpl';
 ?>
