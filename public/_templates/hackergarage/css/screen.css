@@ -1023,3 +1023,7 @@ div#sort-by-type a:hover
 	margin-top:5px;
 	padding-left:5px;
 }
+
+.tip {
+	color:#F55;
+	}

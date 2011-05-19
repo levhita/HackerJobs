@@ -9,9 +9,9 @@
     <meta name="keywords" content="{if $seo_keys}{$seo_keys}{else}{$meta_keywords}{/if}" />
 	<meta name="generator" content="Bluefish 2.0.1" />
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-	<link rel="icon" type="image/png" href="{$BASE_URL}favicon.png" />	
+	<link rel="icon" type="image/png" href="{$BASE_URL}favicon.png" />
 	{if $CURRENT_PAGE == '' || $CURRENT_PAGE != 'jobs'}
-		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/all/all" />
+		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/all/all/" />
 	{else}
 		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/{$current_category}/{$current_type}/" />
 	{/if}
