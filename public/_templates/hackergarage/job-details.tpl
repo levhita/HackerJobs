@@ -38,26 +38,7 @@
 				<div id="job-description">
 				{$job.description}
 				</div>
-				{literal}
-				<div id="disqus_thread"></div>
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'hackerjobs'; // required: replace example with your forum shortname
 
-    // The following are highly recommended additional parameters. Remove the slashes in front to use.
-    var disqus_identifier = 'job_{/literal}{$job.id}{literal}';
-    var disqus_url = '{/literal}{$BASE_URL}job/{$job.id}{literal}';
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-				{/literal}
 				<br />
 				{if $job.apply_online == 1 && $CURRENT_PAGE != 'verify'}
 					<div id="apply_online_now"><a href="#" onclick="$('#apply-online').toggle(); window.location.href = '#apply'; return false;">{$translations.apply.apply_message}</a></div>
@@ -137,7 +118,27 @@
 						</form>
 					</div><!-- #apply-online -->
 				{/if}
-			<br />{include file="company-posts-loop.tpl"}
+				{literal}
+					<div id="disqus_thread"></div>
+                    <script type="text/javascript">
+                        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                        var disqus_shortname = 'hackerjobs'; // required: replace example with your forum shortname
+                    
+                        // The following are highly recommended additional parameters. Remove the slashes in front to use.
+                        var disqus_identifier = 'job_{/literal}{$job.id}{literal}';
+                        var disqus_url = '{/literal}{$BASE_URL}job/{$job.id}{literal}';
+                    
+                        /* * * DON'T EDIT BELOW THIS LINE * * */
+                        (function() {
+                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                            dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
+                    </script>
+                    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                    <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+                {/literal}
+					<br />{include file="company-posts-loop.tpl"}
 			</div><!-- #job-details -->
 {literal}
 	<script type="text/javascript">

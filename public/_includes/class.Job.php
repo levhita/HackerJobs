@@ -184,7 +184,7 @@ class Job
 	// $random: (1/0) randomize results?
 	// $days_behind: (int) only get results from last N days
 	// $for_feed: (boolean) is this request from rss feed?
-	public function GetJobs($type_id = false, $categ_id = false, $limit = false, $random, $days_behind, $for_feed = false, $city_id = false, $type_id = false, $spotlight = false)
+	public function GetJobs($type_id = false, $categ_id = false, $limit = false, $random, $days_behind, $for_feed = false, $city_id = false, $spotlight = false)
 	{
 		global $db;
 		$jobs = array();
@@ -202,7 +202,6 @@ class Job
 		{
 			$type_id = $this->GetTypeId($type_id);
 		}
-		
 		if (is_numeric($type_id) && $type_id != 0)
 		{
 			$conditions .= ' AND type_id = ' . $type_id;
