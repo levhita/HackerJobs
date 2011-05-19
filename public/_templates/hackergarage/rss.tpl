@@ -5,19 +5,21 @@
 			<p>
 				{$translations.rss.intro}
 			</p>
-			<h3>Feeds For Categories:</h3>
-			<ul>
-				<li><a href="{$BASE_URL}rss/all/">{$translations.rss.all_categories}</a></li>
-				{section name=tmp loop=$categories}
-				<li><a href="{$BASE_URL}rss/{$categories[tmp].var_name}/">{$translations.rss.for} {$categories[tmp].name}</a></li>
-				{/section}
-			</ul>
 			
-			<h3>Feeds For Types:</h3>
 			<ul>
-				<li><a href="{$BASE_URL}rsstype/all/">{$translations.rss.all_types}</a></li>
-				{section name=tmp loop=$types}
-				<li><a href="{$BASE_URL}rsstype/{$types[tmp].var_name}/">{$translations.rss.for} {$types[tmp].name}</a></li>
+				<li>
+					<a href="{$BASE_URL}rss/all/all/">{$translations.rss.all}</a>
+					{section name=type loop=$types}
+						<a href="{$BASE_URL}rss/all/{$types[type].var_name}/" title="Latest {$types[type].name} Jobs"><img src="{$BASE_URL}_templates/{$THEME}/img/icon-{$types[type].var_name}.png" alt="{$types[type].name}" /></a>
+					{/section}
+				</li>
+				{section name=catego loop=$categories}
+				<li>
+				<a href="{$BASE_URL}rss/{$categories[catego].var_name}/all/">{$translations.rss.for} {$categories[catego].name} {$translations.rss.jobs}</a>
+					{section name=type loop=$types}
+						<a href="{$BASE_URL}rss/{$categories[catego].var_name}/{$types[type].var_name}/" title="Latest {$types[type].name} Jobs for {$categories[catego].name} "><img src="{$BASE_URL}_templates/{$THEME}/img/icon-{$types[type].var_name}.png" alt="{$types[type].name}" /></a>
+					{/section}
+				</li>
 				{/section}
 			</ul>
 		</div><!-- /content -->
