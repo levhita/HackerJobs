@@ -38,6 +38,7 @@
 	$smarty->assign('jobs_count', $jobsCount);
 	$smarty->assign('types', get_types());
 	$smarty->assign('current_category', $category_var_name);
+	$smarty->assign('current_type', (empty($type_var_name))?'all':$type_var_name);
 	$smarty->assign('current_category_name', $category['name']);
 
 	$smarty->assign('seo_title', $category['title']);
