@@ -42,7 +42,7 @@
 					</div>
 					<h4>{$translations.publish.options_title}</h4>
 					<p>
-						{$translations.publish.options_info}:
+						<span class="tip">{$translations.publish.options_info}</span>:
 					</p>
 					<ul>	
 						<li><a href="{$BASE_URL}post/{$CURRENT_ID}/{$auth}/" title="{$translations.publish.edit}">&raquo; {$translations.publish.edit}</a></li>
