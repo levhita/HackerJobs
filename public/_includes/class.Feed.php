@@ -144,7 +144,7 @@ class Feed
 
 		if($rss_writer_object->writerss($output))
 		{
-			header('Content-Type: text/xml; charset="utf-8"');
+			header('Content-Type: application/rss+xml; charset="utf-8"');
 			header('Content-Length: '.strval(strlen($output)));
 			echo $output;
 		}
