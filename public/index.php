@@ -187,7 +187,6 @@
 			$html_title = 'RSS Feeds for ' . SITE_NAME;
 			$flag = 1;
 			break;
-			
 		case 'sitemap':
 			$html_title = 'Sitemap';
 			$template = 'sitemap.tpl';
@@ -265,6 +264,7 @@
 	
 	// get job categories and cities
 	$smarty->assign('categories', get_categories());
+	$smarty->assign('types', get_types());
 	$smarty->assign('articles', get_articles());
 	$smarty->assign('navigation', get_navigation());
 	

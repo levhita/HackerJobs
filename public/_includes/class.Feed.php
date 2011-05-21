@@ -5,7 +5,7 @@
  * @author     Filip C.T.E. <http://www.filipcte.ro> <me@filipcte.ro>
  * @license    You are free to edit and use this work, but it would be nice if you always referenced the original author ;)
  *             (see license.txt).
- * 
+ *
  * Feed class displays RSS feeds
  */
 
@@ -16,8 +16,11 @@ class Feed
 {
 	var $mCategoryId = false;
 	var $mCategoryName = false;
-	
-	function __construct($category = false)
+	var $mTypeId = false;
+	var $mVarNameId = false;
+	var $mTypeVarName = false;
+
+	function __construct($category = false, $type = false)
 	{
 		global $db;
 		if ($category != 'all')
@@ -29,7 +32,6 @@ class Feed
 			$row = $result->fetch_assoc();
 			$this->mCategoryId = $row['id'];
 			$this->mCategoryName = $row['name'];
-			return 1;
 		}
 		else if ($category == 'all')
 		{
@@ -39,8 +41,29 @@ class Feed
 		{
 			return 0;
 		}
+	  
+		if ($type != 'all')
+		{
+			$sql = 'SELECT id, name
+			               FROM '.DB_PREFIX.'types
+			               WHERE var_name = "' . $type . '"';
+			$result = $db->query($sql);
+			$row = $result->fetch_assoc();
+			$this->mTypeId = $row['id'];
+			$this->mTypeVarName = $type;
+			$this->mTypeName = $row['name'];
+		}
+		else if ($type == 'all')
+		{
+			$this->mTypeId = 'all';
+		}
+		else
+		{
+			return 0;
+		}
+		return 1;
 	}
-	
+
 	// Display a feed
 	public function Display()
 	{
@@ -51,14 +74,16 @@ class Feed
 		$rss_writer_object->rssnamespaces['dc']='http://purl.org/dc/elements/1.1/';
 
 		$properties = array();
-		if ($this->mCategoryId == 'all')
-		{
-			$properties['description'] = 'Latest jobs';
+		$properties['description'] = 'Latest';
+
+		if ($this->mTypeId != 'all') {
+			$properties['description'] .= ' '. ucwords($this->mTypeName);
 		}
-		else
-		{
-			$properties['description'] = 'Latest jobs for ' . ucwords($this->mCategoryName);
+		$properties['description'] .= ' Jobs';
+		if ($this->mCategoryId != 'all') {
+			$properties['description'] .= ' for ' . ucwords($this->mCategoryName);
 		}
+
 		$properties['link'] = BASE_URL;
 		$properties['title'] = SITE_NAME;
 		$properties['dc:date'] = date('d-m-Y');
@@ -67,14 +92,19 @@ class Feed
 		$count = 0;
 
 		$jobb = new Job();
-		if ($this->mCategoryId == 'all')
+		$category = 0;
+		$type = 0;
+		if ($this->mCategoryId != 'all')
 		{
-			$jobs = $jobb->GetJobs(0, 0, 0, 0, 0, true);
+			$category = $this->mCategoryId;
 		}
-		else
+		if ($this->mTypeId != 'all')
 		{
-			$jobs = $jobb->GetJobs(0, $this->mCategoryId, 0, 0, 0, true);
+			$type = $this->mTypeId;
+				
 		}
+
+		$jobs = $jobb->GetJobs($type, $category, 0, 0, 0, true);
 		foreach ($jobs as $job)
 		{
 			$count++;
@@ -82,8 +112,8 @@ class Feed
 			{
 				break;
 			}
-			
-			$properties=array();  
+				
+			$properties=array();
 			$properties['description'] = '<strong>Location:</strong> ' . $job['location'] . '<br />';
 			if ($job['url'] != '' && $job['url'] != 'http://')
 			{
@@ -96,14 +126,14 @@ class Feed
 			$properties['link'] = BASE_URL . URL_JOB .'/' . $job['id'] . '/' . $job['url_title'] . '/';
 
 			$type = '['.$job['type_name'].']';
-			
+				
 			$properties['title'] = $type . ' ' . $job['title'] . ' at ' . $job['company'];
 			$properties['dc:date'] = $job['mysql_date'];
 			$rss_writer_object->additem($properties);
 		}
 		if (empty($jobs))
 		{
-			$properties=array();  
+			$properties=array();
 			$properties['description'] = ' ';
 			$properties['description'] .= ' ';
 			$properties['link'] = ' ';
@@ -114,7 +144,7 @@ class Feed
 
 		if($rss_writer_object->writerss($output))
 		{
-			header('Content-Type: text/xml; charset="utf-8"');
+			header('Content-Type: application/rss+xml; charset="utf-8"');
 			header('Content-Length: '.strval(strlen($output)));
 			echo $output;
 		}
@@ -126,4 +156,3 @@ class Feed
 	}
 
 }
-?>

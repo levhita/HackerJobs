@@ -1,8 +1,8 @@
 <?php
 	if ($id != '' && !is_numeric($id))
 	{
-		$feed = new Feed($id);
-		if ($feed->mCategoryId != '')
+		$feed = new Feed($id, $extra);
+		if ($feed->mCategoryId != '' && $feed-> mTypeId !='')
 		{
 			$feed->Display();
 			exit;

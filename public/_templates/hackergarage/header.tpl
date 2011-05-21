@@ -9,11 +9,11 @@
     <meta name="keywords" content="{if $seo_keys}{$seo_keys}{else}{$meta_keywords}{/if}" />
 	<meta name="generator" content="Bluefish 2.0.1" />
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
-	<link rel="icon" type="image/png" href="{$BASE_URL}favicon.png" />	
+	<link rel="icon" type="image/png" href="{$BASE_URL}favicon.png" />
 	{if $CURRENT_PAGE == '' || $CURRENT_PAGE != 'jobs'}
-		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/all/" />
+		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/all/all/" />
 	{else}
-		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/{$current_category}/" />
+		<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{$BASE_URL}rss/{$current_category}/{$current_type}/" />
 	{/if}
 	<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/screen.css" type="text/css" media="screen" />
 	<link rel="stylesheet" href="{$BASE_URL}_templates/{$THEME}/css/print.css" media="print" type="text/css" />
@@ -51,7 +51,7 @@
 				{/if}
 			</ul>
 			<div id="the_feed">
-				<a href="{$BASE_URL}rss/all/" title="{$translations.header.rss_title}"><img src="{$BASE_URL}_templates/{$THEME}/img/bt-rss.png" alt="{$translations.header.rss_alt}" /></a>
+				<a href="{$BASE_URL}rss/all/all/" title="{$translations.header.rss_title}"><img src="{$BASE_URL}_templates/{$THEME}/img/bt-rss.png" alt="{$translations.header.rss_alt}" /></a>
 			</div>
 		</div><!-- #header -->
 		

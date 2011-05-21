@@ -41,3 +41,8 @@
 				{/if}
 			</div><!-- #stats -->
 			{/if}
+			
+			{if $CURRENT_PAGE == 'post' || $CURRENT_PAGE == 'verify'}
+			<h4>{$translations.publish.sidebar_title}</h4>
+			<p>{$translations.publish.sidebar_content}</p>
+			{/if}
